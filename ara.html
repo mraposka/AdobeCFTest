@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ara</title>
+    <a href="ekle.html">Ekle</a> 
+    <a href="list.cfm">Listele</a>
+</head>
+
+<body>
+    <h2>Kişisel Bilgileri Girin</h2>
+    <form action="ara.cfm" method="post" id="form">
+        <label for="ad">Ad:</label>
+        <input type="text" name="ad"><br>
+
+        <label for="soyad">Soyad:</label>
+        <input type="text" name="soyad"><br>
+
+        <button onclick="jsValidate()" type="submit">Ara</button>
+    </form>
+    <script>
+        function jsValidate() {
+            var ad = document.getElementsByName("ad")[0];
+            var soyad = document.getElementsByName("soyad")[0];
+            if (ad.value == "" && soyad.value == "") {
+                alert("Form boş");
+                //event.preventDefault(); //JS ile validate yapmak için bu kod bloğunu aktif et - CFM ile yapmak için bu kod bloğunu deaktif et
+            }
+        }
+        //CFM ile validate edip geri değer döndürmek(url üzerinden mesaj gönderip alert ile ekrana hatayı basıyor)
+        var message = getURLParameter("message");
+        if (message) {
+            alertMessage(message);
+            window.location = ('ara.html')
+        }
+        function alertMessage(message) {
+            alert(message);
+        }
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
+        //CFM ile validate edip geri değer döndürmek(url üzerinden mesaj gönderip alert ile ekrana hatayı basıyor)
+    </script>
+</body>
+
+</html>
